@@ -1,4 +1,3 @@
-# app/routes/auth.py
 from fastapi import APIRouter, Depends, HTTPException, status
 from pydantic import BaseModel, constr
 from sqlmodel.ext.asyncio.session import AsyncSession
