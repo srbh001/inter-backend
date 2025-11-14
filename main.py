@@ -2,16 +2,26 @@ import os
 import dotenv
 
 from fastapi import FastAPI
+import logging
 from fastapi.middleware.cors import CORSMiddleware
 
 import config
 from app.router import router
 from app.user_router import user_router
+from utils.db import init_db
 
 dotenv.load_dotenv()
 
+logger = logging.getLogger(__name__)
+
 
 app = FastAPI()
+
+
+@app.on_event("startup")
+async def on_startup():
+    logger.info("App startup: initializing DB.")
+    await init_db()
 
 
 origins = [
